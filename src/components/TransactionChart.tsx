@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 interface Transaction {
   id: string;
@@ -16,6 +17,7 @@ interface TransactionChartProps {
 export default function TransactionChart({
   transactions,
 }: TransactionChartProps) {
+  const { formatAmount, convertAmount } = useCurrency();
   const chartData = useMemo(() => {
     if (!transactions || transactions.length === 0) return [];
 
@@ -94,39 +96,37 @@ export default function TransactionChart({
   }
 
   return (
-    <div className="w-full h-80 relative">
+    <div className="w-full h-full flex flex-col">
       {/* Chart Title */}
-      <div className="flex items-center justify-between mb-4">
-        <h4 className="text-lg font-semibold text-gray-900">Balance History</h4>
-        <div className="flex items-center gap-4 text-sm">
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-emerald-500 rounded-full"></div>
-            <span className="text-gray-600">Positive Balance</span>
+      <div className="flex items-center justify-between mb-2">
+        <h4 className="text-sm font-semibold text-gray-900">Balance History</h4>
+        <div className="flex items-center gap-3 text-xs">
+          <div className="flex items-center gap-1">
+            <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
+            <span className="text-gray-600">Positive</span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-            <span className="text-gray-600">Negative Balance</span>
+          <div className="flex items-center gap-1">
+            <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+            <span className="text-gray-600">Negative</span>
           </div>
         </div>
       </div>
 
       {/* Chart Area */}
-      <div className="relative h-64 border-l border-b border-gray-200">
+      <div className="relative flex-1 border-l border-b border-gray-200 min-h-0">
         {/* Y-axis labels */}
-        <div className="absolute left-0 top-0 h-full flex flex-col justify-between text-xs text-gray-500 -ml-16">
-          <span>₹{Math.round(maxBalance).toLocaleString()}</span>
+        <div className="absolute left-0 top-0 h-full flex flex-col justify-between text-xs text-gray-500 -ml-12">
+          <span>₹{Math.round(maxBalance / 1000)}k</span>
           <span>
-            ₹
-            {Math.round(maxBalance * 0.75 + minBalance * 0.25).toLocaleString()}
+            ₹{Math.round((maxBalance * 0.75 + minBalance * 0.25) / 1000)}k
           </span>
           <span>
-            ₹{Math.round(maxBalance * 0.5 + minBalance * 0.5).toLocaleString()}
+            ₹{Math.round((maxBalance * 0.5 + minBalance * 0.5) / 1000)}k
           </span>
           <span>
-            ₹
-            {Math.round(maxBalance * 0.25 + minBalance * 0.75).toLocaleString()}
+            ₹{Math.round((maxBalance * 0.25 + minBalance * 0.75) / 1000)}k
           </span>
-          <span>₹{Math.round(minBalance).toLocaleString()}</span>
+          <span>₹{Math.round(minBalance / 1000)}k</span>
         </div>
 
         {/* Grid lines */}
@@ -219,7 +219,7 @@ export default function TransactionChart({
         </svg>
 
         {/* X-axis labels */}
-        <div className="absolute -bottom-8 left-0 right-0 flex justify-between text-xs text-gray-500">
+        <div className="absolute -bottom-6 left-0 right-0 flex justify-between text-xs text-gray-500">
           <span>{new Date(chartData[0]?.date).toLocaleDateString()}</span>
           {chartData.length > 1 && (
             <span>
@@ -232,11 +232,11 @@ export default function TransactionChart({
       </div>
 
       {/* Current Balance Display */}
-      <div className="mt-4 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-lg">
-          <span className="text-sm text-gray-600">Current Balance:</span>
+      <div className="mt-1 text-center">
+        <div className="inline-flex items-center gap-2 px-2 py-1 bg-gray-50 rounded text-xs">
+          <span className="text-gray-600">Current Balance:</span>
           <span
-            className={`text-lg font-bold ${
+            className={`font-bold ${
               chartData[chartData.length - 1]?.balance >= 0
                 ? "text-emerald-600"
                 : "text-red-600"

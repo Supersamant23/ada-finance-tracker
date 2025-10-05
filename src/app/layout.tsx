@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { CurrencyProvider } from "@/contexts/CurrencyContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,7 +15,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Finsay - AI-Powered Finance Tracker",
-  description: "Manage your finances with the power of natural language and AI insights",
+  description:
+    "Manage your finances with the power of natural language and AI insights",
 };
 
 export default function RootLayout({
@@ -27,7 +29,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <CurrencyProvider>{children}</CurrencyProvider>
       </body>
     </html>
   );

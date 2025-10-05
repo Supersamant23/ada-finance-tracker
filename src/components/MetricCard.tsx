@@ -1,15 +1,24 @@
 // src/components/MetricCard.tsx
+"use client";
+
+import { useCurrency } from "@/contexts/CurrencyContext";
+
 interface MetricCardProps {
   title: string;
   value: number;
+  fromCurrency?: string;
 }
 
-export default function MetricCard({ title, value }: MetricCardProps) {
-  const formattedValue = new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
-    minimumFractionDigits: 2,
-  }).format(value);
+export default function MetricCard({
+  title,
+  value,
+  fromCurrency = "INR",
+}: MetricCardProps) {
+  const { formatAmount, convertAmount } = useCurrency();
+
+  // Convert amount if needed and format with current currency
+  const convertedValue = convertAmount(value, fromCurrency);
+  const formattedValue = formatAmount(convertedValue);
 
   // Determine card styling based on title
   const getCardStyle = (title: string) => {
