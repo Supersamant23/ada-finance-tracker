@@ -18,7 +18,6 @@ interface TransactionChartProps {
 export default function TransactionChart({
   transactions,
 }: TransactionChartProps) {
-  const {  formatAmount: _formatAmount, convertAmount: _convertAmount } = useCurrency();
   const chartData = useMemo(() => {
     if (!transactions || transactions.length === 0) return [];
 

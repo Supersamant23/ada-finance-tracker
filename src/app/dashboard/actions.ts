@@ -4,6 +4,14 @@ import { createClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
+type AITransaction = {
+  amount: number;
+  description: string;
+  type: string;
+  category: string;
+}
+
+
 // --- Helper function to create the transaction ---
 async function createTransaction(transactionData: {
   amount: number;
@@ -86,14 +94,14 @@ export async function handlePrompt(prompt: string) {
     // Check if the response contains a transactions array
     if (jsonResponse.transactions && Array.isArray(jsonResponse.transactions)) {
       // Create a promise for each transaction creation
-      const transactionPromises = jsonResponse.transactions.map((tx: any) => 
-        createTransaction({
-          amount: tx.amount,
-          description: tx.description,
-          type_name: tx.type,
-          category_name: tx.category,
-        })
-      );
+      const transactionPromises = jsonResponse.transactions.map((tx: AITransaction) => 
+      createTransaction({
+        amount: tx.amount,
+        description: tx.description,
+        type_name: tx.type,
+        category_name: tx.category,
+      })
+    );
 
       // Wait for all transactions to be processed
       await Promise.all(transactionPromises);
@@ -108,8 +116,8 @@ export async function handlePrompt(prompt: string) {
     else {
       return { success: false, message: 'Sorry, I could not understand that.' };
     }
-  } catch (error) {
-    console.error('Error in handlePrompt:', error);
+  }  catch {
+    console.error('Error in handlePrompt');
     return { success: false, message: 'An error occurred while processing your request.' };
   }
 }

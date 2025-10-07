@@ -28,7 +28,7 @@ export default async function DashboardPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-          <p className="text-gray-600 mt-1">Welcome back! Here's your financial overview.</p>
+          <p className="text-gray-600 mt-1">Welcome back! Here&apos;s your financial overview.</p>
         </div>
         <div className="text-sm text-gray-500">
           {new Date().toLocaleDateString('en-US', { 

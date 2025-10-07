@@ -16,14 +16,14 @@ export const createClient = async () => {
         async set(name: string, value: string, options) {
           try {
             cookieStore.set({ name, value, ...options });
-          } catch (_error) {
+          } catch {
             // The `set` method was called from a Server Component.
           }
         },
         async remove(name: string, options) {
           try {
             cookieStore.set({ name, value: '', ...options });
-          } catch (_error) {
+          } catch {
             // The `delete` method was called from a Server Component.
           }
         },
