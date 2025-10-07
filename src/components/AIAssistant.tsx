@@ -133,22 +133,10 @@ export default function AIAssistant() {
         {/* Quick Actions */}
         <div className="mt-4 flex flex-wrap gap-2">
           <button
-            onClick={() => setPrompt("What's my spending this month?")}
-            className="text-xs px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full transition-colors"
-          >
-            Monthly spending
-          </button>
-          <button
             onClick={() => setPrompt("Add ₹500 expense for groceries")}
-            className="text-xs px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full transition-colors"
+            className="text-xs px-3 py-1 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-full transition-colors"
           >
             Add expense
-          </button>
-          <button
-            onClick={() => setPrompt("Show my account balances")}
-            className="text-xs px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full transition-colors"
-          >
-            Account balances
           </button>
         </div>
       </div>

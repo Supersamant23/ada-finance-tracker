@@ -130,7 +130,10 @@ export default async function TransactionsPage() {
             </span>
           </div>
 
-          <div className="space-y-3 max-h-96 overflow-y-auto">
+          <div
+            className="space-y-3 overflow-y-auto"
+            style={{ maxHeight: "calc(100vh - 400px)" }}
+          >
             {incomeTransactions.length > 0 ? (
               incomeTransactions.slice(0, 10).map((tx) => (
                 <div
@@ -218,7 +221,10 @@ export default async function TransactionsPage() {
             </span>
           </div>
 
-          <div className="space-y-3 max-h-96 overflow-y-auto">
+          <div
+            className="space-y-3 overflow-y-auto"
+            style={{ maxHeight: "calc(100vh - 400px)" }}
+          >
             {expenseTransactions.length > 0 ? (
               expenseTransactions.slice(0, 10).map((tx) => (
                 <div
@@ -289,7 +295,10 @@ export default async function TransactionsPage() {
             </span>
           </div>
 
-          <div className="space-y-3 max-h-96 overflow-y-auto">
+          <div
+            className="space-y-3 overflow-y-auto"
+            style={{ maxHeight: "calc(100vh - 400px)" }}
+          >
             {transactions && transactions.length > 0 ? (
               transactions.slice(0, 10).map((tx) => (
                 <div
