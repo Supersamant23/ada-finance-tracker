@@ -4,7 +4,7 @@ import { createClient } from '@/lib/supabase/server';
 import { addAccount } from './actions';
 
 export default async function AccountsPage() {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: accounts, error } = await supabase.from('accounts').select('*');
 
   return (

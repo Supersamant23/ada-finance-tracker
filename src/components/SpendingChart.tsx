@@ -3,9 +3,14 @@
 
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
+type SpendingData = {
+  name: string;
+  value: number;
+}
+
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
 
-export default function SpendingChart({ data }: { data: any[] }) {
+export default function SpendingChart({ data }: { data: SpendingData[] }) {
   if (!data || data.length === 0) {
     return <p className="text-center text-gray-500">No spending data available.</p>;
   }

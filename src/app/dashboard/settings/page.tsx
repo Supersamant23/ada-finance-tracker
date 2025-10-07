@@ -3,7 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import CurrencySelector from "@/components/CurrencySelector";
 
 export default async function SettingsPage() {
-  const supabase = createClient();
+  const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();

@@ -5,7 +5,7 @@ import { createClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
 
 export async function addTransaction(formData: FormData) {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   // We need to convert form data to a plain object
   const data = Object.fromEntries(formData.entries());

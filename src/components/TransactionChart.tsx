@@ -6,6 +6,7 @@ import { useCurrency } from "@/contexts/CurrencyContext";
 interface Transaction {
   id: string;
   amount: number;
+  description: string;
   transaction_date: string;
   transaction_types: { name: string } | null;
 }
@@ -17,7 +18,7 @@ interface TransactionChartProps {
 export default function TransactionChart({
   transactions,
 }: TransactionChartProps) {
-  const { formatAmount, convertAmount } = useCurrency();
+  const {  formatAmount: _formatAmount, convertAmount: _convertAmount } = useCurrency();
   const chartData = useMemo(() => {
     if (!transactions || transactions.length === 0) return [];
 

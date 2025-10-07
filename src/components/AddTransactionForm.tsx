@@ -3,8 +3,23 @@
 
 import { addTransaction } from '@/app/dashboard/transactions/actions';
 
+type Account = {
+  id: string | number;
+  account_name: string;
+}
+
+type Category = {
+  id: string | number;
+  name: string;
+}
+
+type TransactionType = {
+  id: string | number;
+  name: string;
+}
+
 // We'll pass the accounts and categories to this component as props
-export default function AddTransactionForm({ accounts, categories, transactionTypes }: { accounts: any[], categories: any[], transactionTypes: any[] }) {
+export default function AddTransactionForm({ accounts, categories, transactionTypes }: { accounts: Account[], categories: Category[], transactionTypes: TransactionType[] }) {
   return (
     <form action={addTransaction} className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
       <h3 className="text-lg font-semibold text-gray-900 mb-6">Add New Transaction</h3>

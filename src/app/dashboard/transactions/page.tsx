@@ -4,7 +4,7 @@ import TransactionChart from "@/components/TransactionChart";
 import CurrencyAmount from "@/components/CurrencyAmount";
 
 export default async function TransactionsPage() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const {
     data: { user },

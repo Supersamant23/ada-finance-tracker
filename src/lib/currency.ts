@@ -33,7 +33,7 @@ export function formatCurrency(amount: number, currency: Currency): string {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }).format(amount);
-  } catch (error) {
+  } catch (_error) {
     // Fallback formatting if locale is not supported
     return `${currency.symbol}${amount.toLocaleString('en-US', {
       minimumFractionDigits: 2,

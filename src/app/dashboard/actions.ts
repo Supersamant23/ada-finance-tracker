@@ -11,7 +11,7 @@ async function createTransaction(transactionData: {
   type_name: string;
   category_name: string;
 }) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) throw new Error("User not authenticated");
 
@@ -56,7 +56,7 @@ async function createTransaction(transactionData: {
 // --- Main function to handle the AI prompt ---
 export async function handlePrompt(prompt: string) {
   const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
-  const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+  const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
 
   // The new masterPrompt from above goes here...
   const masterPrompt = `
